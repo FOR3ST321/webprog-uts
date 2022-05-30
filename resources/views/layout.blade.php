@@ -9,40 +9,80 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css">
+
+    <style>
+        body {
+            background-image: url('/img/bg.png');
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+    </style>
     <title>Happy Book Store</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">HAPPY BOOK STORE</a>
+        <a class="navbar-brand" href="/">HAPPY BOOK STORE</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-                <li class="nav-item <?= ($activeNav == 'home') ? 'active' : ''?>">
+                <li class="nav-item <?= $activeNav == 'home' ? 'active' : '' ?>">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item dropdown  <?= ($activeNav == 'category') ? 'active' : ''?>">
+                <li class="nav-item dropdown  <?= $activeNav == 'category' ? 'active' : '' ?>">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         Category
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         @foreach ($categories as $a)
-                            <a class="dropdown-item <?= (isset($activeSubNav)  && $activeSubNav == $a->category) ? 'active' : ''?>"  href="/category/{{$a->category}}">{{$a->category}}</a>
+                            <a class="dropdown-item <?= isset($activeSubNav) && $activeSubNav == $a->category ? 'active' : '' ?>"
+                                href="/category/{{ $a->id }}">{{ $a->category }}</a>
                         @endforeach
                     </div>
                 </li>
-                <li class="nav-item  <?= ($activeNav == 'contact') ? 'active' : ''?>">
+                <li class="nav-item  <?= $activeNav == 'contact' ? 'active' : '' ?>">
                     <a class="nav-link" href="/contact">Contact</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div class="container-fluid">
-        @yield('content')
+    <div class="container" style="margin-top: 7vh">
+        <div class="row">
+            <div class="col-8">
+                @yield('content')
+            </div>
+
+            <div class="col-4">
+                <div class="d-flex justify-content-end" style="box-shadow: 10px 11px 35px -7px rgba(0,0,0,0.41);">
+                    <div class="card text-center" style="width: 18rem;">
+                        <div class="card-header">
+                            <strong>Category</strong>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            @foreach ($categories as $item)
+                                <li class="list-group-item"><a href="/category/{{ $item->id }}">{{ $item->category }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="footer d-flex align-items-center bg-dark">
+        <p class="text-light" style="margin:10px">Copyright By &copy; Happy Book Store</p>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

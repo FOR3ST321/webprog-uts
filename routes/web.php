@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,5 @@ use App\Http\Controllers\CategoryController;
 
 Route::get('/', [BookController::class, 'home']);
 Route::get('/contact', [Controller::class, 'contact']);
-Route::get('/category/{name}', [CategoryController::class, 'category']);
+Route::get('/category/{id}', [CategoryController::class, 'category']);
 Route::get('/book/{id}', [DetailController::class, 'bookdetail']);
