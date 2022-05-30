@@ -18,6 +18,8 @@ class Books extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('title');
 
+            $table->timestamps();
+
             $table->foreign('category_id')->references('id')->on('categories');
         });
     }

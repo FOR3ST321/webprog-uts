@@ -21,6 +21,8 @@ class Details extends Migration
             $table->integer('year');
             $table->longText('description');
 
+            $table->timestamps();
+
             $table->foreign('book_id')->references('id')->on('books');
         });
     }
